@@ -1,21 +1,155 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Search Page</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="form">
-      <form method="POST">
-        {{ form.hidden_tag() }} {{ form.search.label }} {{ form.search() }} {{
-        form.submit() }}
-      </form>
+<head>
+  <title>Code Chaser</title>
+  <!-- <img class="card-img-top" src="static/leetcode.jpg" style="height: 100px;" > -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 36px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-inline .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+
+    .form-inline .btn {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+
+    .card {
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      transition: box-shadow 0.3s;
+      margin-bottom: 20px;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .card-text {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .no-results-card {
+      background-color: #333;
+      border-color: #555;
+      color: #fff;
+    }
+
+    .footer {
+      background-color: #000000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Code Chaser</h1>
+
+  <form action="/" method="POST">
+    {{ form.csrf_token }}
+    <div class="form-row justify-content-center">
+      <div class="col-auto">
+        <input type="text" name="search" class="form-control mb-2" placeholder="Enter your search query">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+      </div>
     </div>
-    <div>
-      {% for result in results %}
-      <a href="{{ result['Question Link'] }}">{{ result['Question Link'] }}</a>
-      <p>Score: {{ result['Score'] }}</p>
-      {% endfor %}
+  </form>
+
+  {% if not results %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card text-center no-results-card">
+            <div class="card-body">
+              <h5 class="card-title">{% if not search_query %}Welcome to Code Chaser!{% else %}No Results Found{% endif %}</h5>
+              {% if not search_query %}
+                <p class="card-text">Please enter a keyword in the search box above to get questions.</p>
+              {% else %}
+                <p class="card-text">Sorry, no matching questions found for "{{ search_query }}".</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </body>
+  {% else %}
+    <div class="container">
+      <div class="row justify-content-center">
+        {% for result in results %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card">
+            <img class="card-img-top" src="static/leetcode.jpg">
+            <div class="card-body">
+              <p class="card-text">{{ result["Question title"] }}</p>
+              <a href="{{ result["Question Link"] }}" class="btn btn-primary">Solve Now</a>
+            </div>
+          </div>
+        </div>
+        {% if loop.last and loop.index % 3 != 0 %}
+          {% for i in range(3 - (loop.index % 3)) %}
+          <div class="col-lg-4 col-md-6 col-sm-12"></div>
+          {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="footer">
+    &copy; 2023 Code Chaser. All rights reserved. | Made with &lt;/&gt; and
+    ❤️ by <a href="https://cse.iitkgp.ac.in/~manaswiraj/" target="_blank">Manaswi Raj</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

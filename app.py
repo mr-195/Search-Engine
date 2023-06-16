@@ -115,10 +115,19 @@ def calc_docs_sorted_order(q_terms):
         # Printing ans
         # print("The Question links in Decreasing Order of Relevance are: \n")
         for doc_index in potential_docs:
-            # print("Question Link:", Qlink[int(
-            #     doc_index) - 1], "\tScore:", potential_docs[doc_index])
+            tempQlink=Qlink[int(
+                doc_index) - 1][:-2]
+            question_title=tempQlink.split('/')[4]
+            pro_q_title=question_title.split('-')
+            string=pro_q_title[0]
+            modified_string = string[0].upper() + string[1:]
+            pro_q_title[0]=modified_string
+            fin_str=""
+            for strings in pro_q_title:
+                fin_str+=strings+" "
+            print(fin_str)
             ans.append({"Question Link": Qlink[int(
-                doc_index) - 1][:-2], "Score": potential_docs[doc_index]})
+                doc_index) - 1][:-2], "Question title":fin_str, "img source": "leetcode.jpg", "Score": potential_docs[doc_index]})
     return ans
 
 
@@ -150,5 +159,9 @@ def home():
     if form.validate_on_submit():
         query = form.search.data
         q_terms = [term.lower() for term in query.strip().split()]
-        results = calc_docs_sorted_order(q_terms)[:20:]
+        results = calc_docs_sorted_order(q_terms)
     return render_template('index.html', form=form, results=results)
+
+if __name__ == "__main__":
+    app.run(debug=True)   
+# this is the backend code - modify it to display 50 responses per page and next 50 in other and so on
