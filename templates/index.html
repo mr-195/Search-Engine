@@ -9,7 +9,7 @@
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 2rem;
       background-color: #000;
       color: #fff;
       display: flex;
@@ -19,9 +19,9 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
       font-weight: 700;
-      font-size: 36px;
+      font-size: 2rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: #fff;
@@ -29,7 +29,7 @@
 
     form {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 2.5rem;
     }
 
     .form-inline .form-control {
@@ -41,20 +41,20 @@
     .form-inline .btn {
       display: inline-block;
       vertical-align: middle;
-      margin-left: 10px;
+      margin-left: 0.625rem;
     }
 
     .card {
       border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0.25rem 0.5rem rgba(255, 255, 255, 0.1);
       transition: box-shadow 0.3s;
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
       background-color: #222;
       color: #fff;
     }
 
     .card:hover {
-      box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0.375rem 0.75rem rgba(255, 255, 255, 0.2);
     }
 
     .card-text {
@@ -71,9 +71,9 @@
     .footer {
       background-color: #000000;
       color: #fff;
-      padding: 20px;
+      padding: 2rem;
       text-align: center;
-      font-size: 14px;
+      font-size: 0.875rem;
       margin-top: auto;
     }
 
@@ -86,10 +86,45 @@
       text-decoration: underline;
     }
 
+    /* Desktops and Laptops */
+    @media (min-width: 62.5rem) {
+      .col-lg-4 {
+        flex-basis: 33.33%;
+        max-width: 33.33%;
+      }
+    }
+
+    /* Tablets */
+    /* @media (min-width: 48rem) and (max-width: 62.4375rem) {
+      .col-md-6 {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    } */
+
+    /* Mobile devices */
+    @media (max-width: 62.4375rem) {
+      .col-lg-4,
+      .col-md-6 {
+        flex-basis: 100%;
+        max-width: 100%;
+
+      }
+      .name-full{
+        font-size: 4 rem;
+      }
+      .col-lg-4:nth-child(3n+1),
+      .col-md-6:nth-child(2n+1) {
+        clear: left;
+      }
+      .form-control {
+        width: 37em;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Code Chaser</h1>
+  <h1 class="name-full">Code Chaser</h1>
 
   <form action="/" method="POST">
     {{ form.csrf_token }}
