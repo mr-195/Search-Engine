@@ -42,7 +42,7 @@ Wait for about a minute, and then the Flask app will run on the development serv
 Open your web browser and navigate to the generated link (e.g., http://127.0.0.1:5000) to access the application.
 
 ## Contributing
-If you'd like to contribute to the CodeWiz Search Engine project, please follow these steps:
+If you'd like to contribute to the CODE CHASE Search Engine project, please follow these steps:
 
 1. Fork the repository on GitHub.
 2. Create a new branch for your feature or bug fix.
